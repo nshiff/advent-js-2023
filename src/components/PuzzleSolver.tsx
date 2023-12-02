@@ -27,6 +27,8 @@ export function PuzzleSolver(){
         for (const lineFull of lines){
             const iGame = lineFull.indexOf(':')
             const line = lineFull.slice(iGame + 1)
+            console.log('---')
+            console.log(i)
             console.log(line)
 
             const rgb ={
@@ -66,8 +68,30 @@ export function PuzzleSolver(){
         return sum;
     }
 
+    function solvePuzzleAdventJS(gifts:any[], materials:string) {
+        const giftsToReturn:any[] = [];
+      
+        for(const gift of gifts){
+            let canBuild = true;    
+            for(let i=0; i<gift.length; i++){
+                console.log(gift[i]) // todo compare to material
+                if(!materials.includes(gift[i])){
+                    canBuild = false;
+                    break;
+                }
+            }
+            if(canBuild){
+                giftsToReturn.push(gift);
+            }
+        }
+      
+        return giftsToReturn
+      }
 
-    const answer = solvePuzzle(getMultilineStringAsArray(PuzzleConstants.testinput02));
+    // const answer = solvePuzzle(getMultilineStringAsArray(PuzzleConstants.input02));
+    const answer = solvePuzzleAdventJS(['tren', 'oso', 'pelota'], 'tronesa');
+
+
 
     console.log('---');
     console.log(answer);
