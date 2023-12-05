@@ -1,33 +1,51 @@
 export function PuzzleSolver(){
-    function solvePuzzleAdventJS(gifts:number[]) {
-        const iRepeated = []
-      
-        for(let i=0; i<gifts.length; i++){
-        //   debugger;
-          const subArray = gifts.slice(i + 1)
-          const match = subArray.indexOf(gifts[i])
-          console.log('match:',match)
-          if(match === -1){
-            continue;
+
+    function solvePuzzleAdventJS(road:string, time:number) {
+
+      console.log('road:', road)
+      console.log('time:', time)
+      let roadSplit = road.split('')
+
+      const results:string[] = [];
+      // for(let i=0; i<time; i++){
+        // results.push(roadSplit.join(''));
+      // }
+
+      results.push(roadSplit.join('')); // initial state, counts as 1 step
+
+      let iSanta = 0;
+      for(let i=0; i<time - 1; i++){
+        if(i === 4){
+          roadSplit = roadSplit.join('').replaceAll('|', '*').split('');
+        }
+
+        if(roadSplit[iSanta + 1] === '|'){
+          results.push(roadSplit.join(''));
+          continue;
+        }
+        else if(roadSplit[iSanta + 1] === '.'
+                || roadSplit[iSanta + 1] === '*'){
+          roadSplit[iSanta] = road[iSanta] === '|' && i >= 5
+            ? '*'
+            : road[iSanta];
+          if(iSanta === 0){
+            roadSplit[iSanta] = '.';  
           }
-          iRepeated.push(match + i + 1);
-          console.log('iRepeated:',iRepeated)
+          
+          roadSplit[iSanta + 1] = 'S';
+          results.push(roadSplit.join(''));
+          iSanta += 1;
         }
-      
-        if(iRepeated.length === 0){
-          return -1;
-        }
-        const iAnswer = Math.min(...iRepeated)
-        console.log('iAnswer:',iAnswer)
-        console.log('gifts[iAnswer]:',gifts[iAnswer])
-        return gifts[iAnswer]
       }
-      
 
-    // const answer = solvePuzzle(getMultilineStringAsArray(PuzzleConstants.input02));
-    const answer = solvePuzzleAdventJS([2, 1, 3, 5, 3, 2]);
+      return results;
+    }
 
+    const road = 'S..|...|..';
+    const time = 10 // units of time
+    const answer = solvePuzzleAdventJS(road, time);
+
+    console.log(answer);
     console.log('---');
-    // console.log(answer);
     return <h3>puzzle solver</h3>;
 }
