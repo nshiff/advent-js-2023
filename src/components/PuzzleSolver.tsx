@@ -5,9 +5,22 @@ export function PuzzleSolver(){
     }
 
     function solvePuzzleAdventJS(gifts:string) {
+
+      let counts = [];
+      let products = [];
+      let countStr = '';
       for(let i=0; i<gifts.length; i++){
-        console.log(`${gifts[i]}:${isDigit(gifts[i])}`)
+        if(isDigit(gifts[i])){
+          countStr += gifts[i];
+          continue;
+        }
+        counts.push(parseInt(countStr));
+        countStr = '';
+        products.push(gifts[i]);
       }
+
+      console.log(counts)
+      console.log(products)
 
       return '';
     }
