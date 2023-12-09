@@ -19,10 +19,35 @@ export function PuzzleSolver(){
         products.push(gifts[i]);
       }
 
-      console.log(counts)
-      console.log(products)
+      // console.log(counts)
+      // console.log(products)
 
-      return '';
+      let outputString = '';
+      for(let i=0; i<counts.length; i++){
+        let count = counts[i];
+        const product = products[i];
+        while(count - 50 >= 0){
+          count -= 50;
+          outputString += `[${product}]`;
+        }
+        
+        while(count - 10 >= 0){
+          count -= 10;
+          outputString += `{${product}}`;
+        }
+
+        if(count - 1 >= 0){
+          outputString += '(';
+          while(count - 1 >= 0){
+            count -= 1;
+            outputString += `${product}`;
+          }
+          outputString += ')';
+        }
+
+      }
+
+      return outputString;
     }
 
     const answer = solvePuzzleAdventJS('76a11b');
