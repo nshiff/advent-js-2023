@@ -4,53 +4,28 @@ export function PuzzleSolver(){
       return !Number.isNaN(parseInt(char));
     }
 
-    function solvePuzzleAdventJS(gifts:string) {
+    function solvePuzzleAdventJS(paths:string[][]) {
+        let pairCurrent = paths[0];
+        let didUpdateThisIteration = true;
+        while(didUpdateThisIteration){
+            didUpdateThisIteration = false;
 
-      let counts = [];
-      let products = [];
-      let countStr = '';
-      for(let i=0; i<gifts.length; i++){
-        if(isDigit(gifts[i])){
-          countStr += gifts[i];
-          continue;
-        }
-        counts.push(parseInt(countStr));
-        countStr = '';
-        products.push(gifts[i]);
-      }
-
-      // console.log(counts)
-      // console.log(products)
-
-      let outputString = '';
-      for(let i=0; i<counts.length; i++){
-        let count = counts[i];
-        const product = products[i];
-        while(count - 50 >= 0){
-          count -= 50;
-          outputString += `[${product}]`;
-        }
-        
-        while(count - 10 >= 0){
-          count -= 10;
-          outputString += `{${product}}`;
+            for(let i=0; i<paths.length;i++){
+                if(paths[i][0] === pairCurrent[1]){
+                    pairCurrent = paths[i];
+                    didUpdateThisIteration = true;
+                    break;
+                }
+            }
+            
         }
 
-        if(count - 1 >= 0){
-          outputString += '(';
-          while(count - 1 >= 0){
-            count -= 1;
-            outputString += `${product}`;
-          }
-          outputString += ')';
-        }
-
-      }
-
-      return outputString;
+        // failed to find pair where current second city was a first city
+        // i.e. second city is the final destination
+        return pairCurrent[1];
     }
 
-    const answer = solvePuzzleAdventJS('76a11b');
+    const answer = solvePuzzleAdventJS([["B","C"],["D","B"],["C","A"]]);
 
     console.log(answer);
     console.log('---');
