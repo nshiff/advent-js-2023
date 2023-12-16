@@ -4,28 +4,24 @@ export function PuzzleSolver(){
       return !Number.isNaN(parseInt(char));
     }
 
-    function solvePuzzleAdventJS(paths:string[][]) {
-        let pairCurrent = paths[0];
-        let didUpdateThisIteration = true;
-        while(didUpdateThisIteration){
-            didUpdateThisIteration = false;
-
-            for(let i=0; i<paths.length;i++){
-                if(paths[i][0] === pairCurrent[1]){
-                    pairCurrent = paths[i];
-                    didUpdateThisIteration = true;
-                    break;
+    function solvePuzzleAdventJS(n:number) {
+        let output = '';
+        for(let i=0; i<n; i++){
+            let stairLine = '';
+            for(let j=0; j<n; j++){
+                if(j >= (n - i - 1)){
+                    stairLine += '#';
                 }
+                else{
+                    stairLine += ' ';
+                }
+                
             }
-            
+            console.log(stairLine);
         }
-
-        // failed to find pair where current second city was a first city
-        // i.e. second city is the final destination
-        return pairCurrent[1];
     }
 
-    const answer = solvePuzzleAdventJS([["B","C"],["D","B"],["C","A"]]);
+    const answer = solvePuzzleAdventJS(6);
 
     console.log(answer);
     console.log('---');
