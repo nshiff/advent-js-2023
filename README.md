@@ -1,4 +1,16 @@
-# React + TypeScript + Vite
+# advent-js-2023
+
+A repo for code experiments during "Advent of Code" exercises
+
+## Quick start
+```
+git pull {URL of this repository}
+cd advent-js-2023
+npm i
+npm run dev
+```
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
