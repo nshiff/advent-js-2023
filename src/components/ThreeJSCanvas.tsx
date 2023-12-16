@@ -5,12 +5,14 @@ export function ThreeJSCanvas() {
     const canvasRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
+        const CANVAS_WIDTH = 400;
+        const CANVAS_HEIGHT = 300;
         const scene = new Scene();
-        const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new PerspectiveCamera(75, CANVAS_WIDTH / CANVAS_HEIGHT, 0.1, 1000);
         const renderer = new WebGLRenderer();
 
-        const geometry = new SphereGeometry(1, 32, 32);
-        const material = new MeshBasicMaterial({ color: 0x00ff00 });
+        const geometry = new SphereGeometry(2, 8, 8);
+        const material = new MeshBasicMaterial({ color: 0x0077ff });
         const sphere = new Mesh(geometry, material);
 
         scene.add(sphere);
@@ -23,7 +25,7 @@ export function ThreeJSCanvas() {
             renderer.render(scene, camera);
         };
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
         canvasRef.current?.appendChild(renderer.domElement);
 
         animate();
